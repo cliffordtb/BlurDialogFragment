@@ -634,7 +634,10 @@ public class BlurDialogEngine {
                 return null;
             }
             //clear memory
-            mBackground.recycle();
+            if (mBackground != null && !mBackground.isRecycled()) {
+                mBackground.recycle();
+                mBackground = null; 
+            }
             return null;
         }
 
