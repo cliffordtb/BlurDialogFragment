@@ -423,8 +423,9 @@ public class BlurDialogEngine {
         final RectF destRect = new RectF(0, 0, overlay.getWidth(), overlay.getHeight());
 
         //draw background from source area in source background to the destination area on the overlay
-        canvas.drawBitmap(bkg, srcRect, destRect, paint);
-
+        if (bkg != null && !bkg.isRecycled()) {
+            canvas.drawBitmap(bkg, srcRect, destRect, paint);
+        }
         //apply fast blur on overlay
         if (mUseRenderScript) {
             overlay = RenderScriptBlurHelper.doBlur(overlay, mBlurRadius, true, mHoldingActivity);
